@@ -48,7 +48,10 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
 
 
     def compute_evaluation(
-        self, explanation: ExplanationWithRationale, **evaluation_args
+        self,
+        explanation: ExplanationWithRationale,
+        target=1,
+        **evaluation_args
     ) -> EvaluationMetricOutput:
         """Evaluate an explanation on the Inverse Number of Segments Cohesion metric.
 
