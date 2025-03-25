@@ -27,7 +27,7 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
     METRIC_FAMILY = EvaluationMetricFamily.COHESION
 
 
-    def _compute_n_segments(arr: np.array) -> int:
+    def _compute_n_segments(self, arr: np.array) -> int:
         arr_bool = arr.astype(bool)
         padded = np.concatenate(([False], arr_bool, [False]))
 
