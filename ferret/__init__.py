@@ -27,6 +27,9 @@ from .evaluators.plausibility_measures import (
     Tokenf1_PlausibilityEvaluation,
     TokenIOU_PlausibilityEvaluation,
 )
+from .evaluators.cohesion_measures import (
+    NSegments_CohesionEvaluation
+)
 
 # Explainers
 from .explainers import BaseExplainer
