@@ -117,12 +117,15 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
                   f"Threshold: {v}")
             top_tokens_g = get_discrete_explanation(human_rationale, v, only_pos, get_discrete_rationale_function)
             print(f"Gets Human: {top_tokens_g}\n")
-            human_n_segments = self._compute_n_segments(top_tokens_g)
 
-            top_tokens_r = get_discrete_explanation(score_explanation, v, only_pos, get_discrete_rationale_function)
-            rationale_n_segments = self._compute_n_segments(top_tokens_r)
+            if top_tokens_g:
+                print("Actually Computed!")
+                human_n_segments = self._compute_n_segments(top_tokens_g)
 
-            n_segment_scores.append(self._compute_n_segments_score(human_n_segments, rationale_n_segments))
+                top_tokens_r = get_discrete_explanation(score_explanation, v, only_pos, get_discrete_rationale_function)
+                rationale_n_segments = self._compute_n_segments(top_tokens_r)
+
+                n_segment_scores.append(self._compute_n_segments_score(human_n_segments, rationale_n_segments))
 
         return EvaluationMetricOutput(
             self,
