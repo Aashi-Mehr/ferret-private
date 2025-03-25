@@ -120,7 +120,7 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
 
             if top_tokens_g:
                 print("Actually Computed!")
-                human_n_segments = self._compute_n_segments(top_tokens_g)
+                human_n_segments = self._compute_n_segments(np.array(top_tokens_g))
 
                 top_tokens_r = get_discrete_explanation(score_explanation, v, only_pos, get_discrete_rationale_function)
                 rationale_n_segments = self._compute_n_segments(top_tokens_r)
