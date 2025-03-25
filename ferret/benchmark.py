@@ -24,6 +24,9 @@ from .evaluators.plausibility_measures import (
     Tokenf1_PlausibilityEvaluation,
     TokenIOU_PlausibilityEvaluation,
 )
+from .evaluators.cohesion_measures import (
+    NSegments_CohesionEvaluation
+)
 from .explainers.explanation import Explanation, ExplanationWithRationale
 from .explainers.gradient import GradientExplainer, IntegratedGradientExplainer
 from .explainers.lime import LIMEExplainer
@@ -112,6 +115,7 @@ class Benchmark:
                 AUPRC_PlausibilityEvaluation,
                 Tokenf1_PlausibilityEvaluation,
                 TokenIOU_PlausibilityEvaluation,
+                NSegments_CohesionEvaluation,
             ]
             self.evaluators = [
                 ev(self.model, self.tokenizer, self.task_name)

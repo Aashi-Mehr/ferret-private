@@ -30,22 +30,27 @@ def _get_id_tokens_percentage(soft_score_explanation, percentage, only_pos=True)
         return None
 
 
-def get_discrete_explanation_topK(score_explanation, topK, only_pos=False):
+def get_discrete_explanation(score_explanation, th, only_pos=False,
+                             discrete_rationale_function=_get_id_tokens_top_k):
 
     # Indexes in the top k. If only pos is true, we only consider scores>0
-    topk_indices = _get_id_tokens_top_k(score_explanation, topK, only_pos=only_pos)
+    topk_indices = discrete_rationale_function(score_explanation, th, only_pos=only_pos)
 
     # Return default score
     if topk_indices is None:
         return None
 
-    # topk_score_explanations: one hot encoding: 1 if the token is in the rationale, 0 otherwise
+    # score_explanations: one hot encoding: 1 if the token is in the rationale, 0 otherwise
     # i hate you [0, 1, 1]
 
-    topk_score_explanations = [
+    score_explanations = [
         1 if i in topk_indices else 0 for i in range(len(score_explanation))
     ]
-    return topk_score_explanations
+    return score_explanations
+
+
+def get_discrete_explanation_topK(score_explanation, topK, only_pos=False):
+    return get_discrete_explanation(score_explanation, topK, only_pos=only_pos)
 
 
 def _check_and_define_get_id_discrete_rationale_function(based_on):
