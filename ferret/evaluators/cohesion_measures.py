@@ -65,6 +65,9 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
             Evaluation : the number of segments Cohesion score of the explanation
         """
 
+        if isinstance(explanation, ExplanationWithRationale) == False:
+            return None
+
         remove_first_last, only_pos, removal_args, _ = parse_evaluator_args(
             evaluation_args
         )
