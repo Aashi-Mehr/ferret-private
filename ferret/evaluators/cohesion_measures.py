@@ -110,16 +110,10 @@ class NSegments_CohesionEvaluation(BaseEvaluator):
         thresholds = removal_args["thresholds"]
         n_segment_scores = []
 
-        b = removal_args['based_on']
         for v in thresholds:
-            print(f"Based on: {b}\n"
-                  f"Rationale: {human_rationale}\n"
-                  f"Threshold: {v}")
             top_tokens_g = get_discrete_explanation(human_rationale, v, only_pos, get_discrete_rationale_function)
-            print(f"Gets Human: {top_tokens_g}\n")
 
             if top_tokens_g:
-                print("Actually Computed!")
                 human_n_segments = self._compute_n_segments(np.array(top_tokens_g))
 
                 top_tokens_r = get_discrete_explanation(score_explanation, v, only_pos, get_discrete_rationale_function)
