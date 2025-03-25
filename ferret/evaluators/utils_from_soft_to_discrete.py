@@ -31,7 +31,7 @@ def _get_id_tokens_percentage(soft_score_explanation, percentage, only_pos=True)
 
 
 def get_discrete_explanation(score_explanation, th, only_pos=False,
-                             discrete_rationale_function=_get_id_tokens_top_k):
+                             discrete_rationale_function=_get_id_tokens_percentage):
 
     # Indexes in the top k. If only pos is true, we only consider scores>0
     topk_indices = discrete_rationale_function(score_explanation, th, only_pos=only_pos)
