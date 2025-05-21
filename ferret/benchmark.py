@@ -24,6 +24,9 @@ from .evaluators.plausibility_measures import (
     Tokenf1_PlausibilityEvaluation,
     TokenIOU_PlausibilityEvaluation,
 )
+from .evaluators.cohesion_measures import (
+    NSegments_CohesionEvaluation
+)
 from .explainers.explanation import Explanation, ExplanationWithRationale
 from .explainers.gradient import GradientExplainer, IntegratedGradientExplainer
 from .explainers.lime import LIMEExplainer
@@ -112,6 +115,7 @@ class Benchmark:
                 AUPRC_PlausibilityEvaluation,
                 Tokenf1_PlausibilityEvaluation,
                 TokenIOU_PlausibilityEvaluation,
+                NSegments_CohesionEvaluation,
             ]
             self.evaluators = [
                 ev(self.model, self.tokenizer, self.task_name)
@@ -305,7 +309,7 @@ class Benchmark:
         """Evaluate explanations using all the evaluators stored in the class.
 
         Args:
-            explanation ( List[Union[Explanation, ExplanationWithRationale]]): list of explanations to evaluate.
+            explanation (List[Union[Explanation, ExplanationWithRationale]]): list of explanations to evaluate.
             target (int): class label for which the explanations are evaluated
             human rationale (list): one-hot-encoding indicating if the token is in the human rationale (1) or not (0). If available, all explanations are evaluated for the human rationale (if provided)
             class_explanation (list): list of list of explanations. The k-th element represents the list of explanations computed varying the target class: the explanation in position k, i is computed using as target class the class label i. The size is # explanation, #target classes. If available, class-based scores are computed.
